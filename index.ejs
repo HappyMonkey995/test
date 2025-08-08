@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Discord OAuth2 Demo</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1>Discord OAuth2 Demo</h1>
+
+    <% if (user) { %>
+      <p>Signed in as <strong><%= user.username %>#<%= user.discriminator %></strong></p>
+      <p><a href="/profile">View profile</a> • <a href="/logout">Logout</a></p>
+    <% } else { %>
+      <p><a class="btn" href="/auth/discord">Login with Discord</a></p>
+      <p class="note">Make sure your app's Redirect URI is: <code><%= redirectUri %></code></p>
+    <% } %>
+
+    <hr />
+    <p>Client ID: <code><%= clientId %></code></p>
+  </main>
+</body>
+</html>
