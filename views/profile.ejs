@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title><%= user.username %>'s profile</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1><%= user.username %>#<%= user.discriminator %></h1>
+
+    <% if (user.avatar) { %>
+      <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="avatar" width="128" height="128" />
+    <% } else { %>
+      <div class="avatar-placeholder">No avatar</div>
+    <% } %>
+
+    <dl>
+      <dt>ID</dt><dd><%= user.id %></dd>
+      <dt>Username</dt><dd><%= user.username %>#<%= user.discriminator %></dd>
+      <dt>Scopes</dt><dd><%= user.scope %></dd>
+    </dl>
+
+    <p><a href="/">Home</a> • <a href="/logout">Logout</a></p>
+  </main>
+</body>
+</html>
