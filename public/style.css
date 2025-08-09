@@ -1,8 +1,0 @@
-body { font-family: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial; background:#f6f8fa; color:#111; }
-main { max-width:760px; margin:60px auto; background:#fff; padding:28px; border-radius:8px; box-shadow:0 6px 30px rgba(0,0,0,0.06); }
-.btn { display:inline-block; padding:10px 14px; background:#7289da; color:white; text-decoration:none; border-radius:6px; }
-.note { font-size:0.9rem; color:#555 }
-.avatar-placeholder { width:128px; height:128px; display:inline-grid; place-items:center; background:#ddd; border-radius:6px; color:#666; }
-dt { font-weight:600; margin-top:8px; }
-dd { margin:0 0 8px 0; }
-code { background:#eee; padding:2px 6px; border-radius:4px; font-size:0.95em; }
