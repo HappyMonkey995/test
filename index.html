@@ -1,140 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ERLC Live Dashboard (Web)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <meta name="color-scheme" content="dark light" />
-  <style>
-    /* Smooth scroll + nicer selection */
-    html { scroll-behavior: smooth; }
-    ::selection { background: rgba(114,137,218,.35); }
-    /* Simple card */
-    .card { @apply bg-slate-800/80 border border-slate-700 rounded-2xl shadow-lg; }
-    .card-header { @apply px-5 pt-4 pb-2 font-semibold text-slate-100; }
-    .card-body { @apply p-5; }
-    .btn { @apply inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-60 disabled:cursor-not-allowed transition; }
-    .input { @apply w-full rounded-xl bg-slate-800 border border-slate-700 px-3 py-2 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500; }
-    .tag { @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-medium bg-slate-700 text-slate-200; }
-    .table { @apply w-full text-left; }
-    .th { @apply text-slate-300 text-xs font-semibold uppercase tracking-wider; }
-    .td { @apply text-slate-100 text-sm; }
-    .section-title { @apply text-lg font-semibold text-slate-100; }
-    .pill { @apply rounded-full px-2 py-0.5 text-xs; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyWebsite</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-  <header class="sticky top-0 z-40 backdrop-blur bg-slate-900/70 border-b border-slate-800">
-    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
-      <h1 class="text-xl font-bold">ERLC Live Dashboard</h1>
-      <span id="statusBadge" class="pill bg-slate-700">Idle</span>
-      <div class="ml-auto flex items-center gap-2">
-        <input id="searchInput" class="input w-64" placeholder="Search players / vehicles..." />
-        <button id="refreshBtn" class="btn">Refresh</button>
-      </div>
-    </div>
+<body>
+  <header>
+    <div class="logo">MyWebsite</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="mx-auto max-w-7xl px-4 py-6 space-y-6">
-    <!-- Stats -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="card">
-        <div class="card-header">Max Players</div>
-        <div class="card-body">
-          <div id="maxPlayers" class="text-3xl font-semibold">—</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">Players Online</div>
-        <div class="card-body">
-          <div id="currentPlayers" class="text-3xl font-semibold">—</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">Queue</div>
-        <div class="card-body">
-          <div id="queueCount" class="text-3xl font-semibold">—</div>
-        </div>
-      </div>
-    </section>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Modern Web Design</h1>
+      <p>Clean, sleek, and interactive style inspired by AcroniX</p>
+      <a href="#features" class="btn">Explore Features</a>
+    </div>
+    <div class="floating-shapes">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+      <div class="shape shape4"></div>
+    </div>
+  </section>
 
-    <!-- Command input -->
-    <section class="card">
-      <div class="card-header">Server Command</div>
-      <div class="card-body flex items-center gap-2">
-        <input id="commandInput" class="input" placeholder="Type a command (e.g., kill username)" />
-        <button id="sendCommandBtn" class="btn">Send Command</button>
-        <span id="commandResult" class="text-sm text-slate-300"></span>
-      </div>
-    </section>
-
-    <!-- Content grid -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <!-- Join Logs -->
+  <section id="features" class="features">
+    <h2>Our Features</h2>
+    <div class="cards">
       <div class="card">
-        <div class="card-header">Join Logs</div>
-        <div class="card-body">
-          <div id="joinLogs" class="space-y-2 text-sm"></div>
-        </div>
+        <h3>Feature One</h3>
+        <p>Short description of the first amazing feature.</p>
       </div>
-
-      <!-- Command Logs -->
       <div class="card">
-        <div class="card-header">Command Logs</div>
-        <div class="card-body">
-          <div id="commandLogs" class="space-y-2 text-sm"></div>
-        </div>
+        <h3>Feature Two</h3>
+        <p>Short description of the second amazing feature.</p>
       </div>
-
-      <!-- Modcalls -->
       <div class="card">
-        <div class="card-header">Modcalls</div>
-        <div class="card-body">
-          <div id="modcalls" class="space-y-2 text-sm"></div>
-        </div>
+        <h3>Feature Three</h3>
+        <p>Short description of the third amazing feature.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Vehicles + Players -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <!-- Vehicles -->
-      <div class="card">
-        <div class="card-header">Vehicles</div>
-        <div class="card-body">
-          <div id="vehicles" class="space-y-2 text-sm"></div>
-        </div>
-      </div>
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-      <!-- Players -->
-      <div class="card">
-        <div class="card-header flex items-center justify-between">
-          <span>Players</span>
-          <span id="playersCount" class="tag">0</span>
-        </div>
-        <div class="card-body">
-          <div class="grid grid-cols-1 gap-3" id="playersList"></div>
-          <!-- Selected player actions -->
-          <div id="playerActions" class="hidden mt-4 border-t border-slate-700 pt-4">
-            <div class="mb-2 text-sm text-slate-300">Selected: <span id="selectedPlayerName" class="font-semibold"></span></div>
-            <div class="flex flex-wrap items-center gap-2">
-              <button data-action="kill" class="btn">Kill</button>
-              <button data-action="kick" class="btn">Kick</button>
-              <button data-action="ban" class="btn">Ban</button>
-              <button data-action="jail" class="btn">Jail</button>
-              <input id="pmInput" class="input w-64" placeholder="Private message..." />
-              <button id="pmSendBtn" class="btn">Send PM</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <footer>
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
 
-    <footer class="text-center text-xs text-slate-400 pt-6">
-      <p>Times shown in America/Los_Angeles (PST/PDT).</p>
-    </footer>
-  </main>
-
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
